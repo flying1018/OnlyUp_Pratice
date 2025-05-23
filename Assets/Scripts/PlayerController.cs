@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-    public float jumpPower;
+    private float jumpPower = 120f;
     private Vector2 curMovementInput;
     [SerializeField] private LayerMask groundLayer;
     private Animator animator;
@@ -70,6 +70,13 @@ public class PlayerController : MonoBehaviour
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * loockSensitivity, 0);
+    }
+
+    public void UseItem(InputAction.CallbackContext context)
+    {
+        UIManager.Instance.item.SetActive(false);
+        jumpPower = 150f;
+
     }
 
     public void OnMove(InputAction.CallbackContext context)

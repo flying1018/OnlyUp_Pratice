@@ -3,11 +3,11 @@ using UnityEngine;
 public class ScriptableObject : MonoBehaviour
 {
     public float jumpForce;
-    [SerializeField] private string name = "none";
+    public float damage;
 
     private void OnTriggerEnter(Collider target)
     {
-        if (target.CompareTag("Player"))
+        if (this.CompareTag("Jump") && target.CompareTag("Player"))
         {
             Rigidbody _rigidbody = target.GetComponent<Rigidbody>();
 
@@ -16,6 +16,10 @@ public class ScriptableObject : MonoBehaviour
                 _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z);
                 _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
+        }
+        else if (this.CompareTag("Hurt") && target.CompareTag("Player"))
+        {
+            CharacterManager.Instance._player.Damage(damage);
         }
     }
 }

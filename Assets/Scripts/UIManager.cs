@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] public GameObject item;
 
     private static UIManager _instance;
     public static UIManager Instance
